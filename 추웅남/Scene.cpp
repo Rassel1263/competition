@@ -69,7 +69,7 @@ void Scene::Update(float deltaTime)
 	if (Input::GetInstance().KeyDown(VK_F6))
 		Game::GetInstance().ChangeScene(new GameScene2());
 
-	if (Input::GetInstance().KeyDown(VK_F7))
+	if (Input::GetInstance().KeyDown(VK_F10))
 		Game::GetInstance().ChangeScene(new RankingScene());
 
 	obm.Collision();

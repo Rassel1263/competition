@@ -40,14 +40,18 @@ void Obstacle::Update(float deltaTime)
 		destroy = true;
 
 	if (pos.y < Camera::GetInstance().cameraPos.y - 1000)
+	{
+		if (type == Type::GARABAGE)
+			nowScene->obstacleManager.DeleteGarbage(this);
+
 		destroy = true;
+	}
 
 	spr.Update(deltaTime);
 }
 
 void Obstacle::Render()
 {
-
 	ri.pos = pos;
 
 	if (type == Type::MINE)
@@ -76,10 +80,19 @@ void Obstacle::OnCollision(Collider& coli)
 			if (static_cast<Bullet*>(coli.obj)->type == Bullet::Type::TORPEDO)
 			{
 				nowScene->obm.AddObject(new Item(pos, nowScene->GetRandNum(0, 5)));
+
+				nowScene->obstacleManager.DeleteGarbage(this);
 				destroy = true;
 			}
 		}
 	}
+}
+
+void ObstacleManager::DeleteGarbage(Obstacle* garbage)
+{
+	auto gf = std::find(garbages.begin(), garbages.end(), garbage);
+	if(gf != garbages.end())
+		garbages.erase(gf);
 }
 
 void ObstacleManager::Init(float gIntraval, float rInterval)
@@ -95,7 +108,9 @@ void ObstacleManager::Spawner(float playerDistance)
 
 	if (gDistance >= gInterval)
 	{
-		nowScene->obm.AddObject(new Obstacle(nowScene->player->pos + D3DXVECTOR2(nowScene->GetRandNum(-500, 500), 1000), Obstacle::Type::GARABAGE));
+		Obstacle* garbage;
+		nowScene->obm.AddObject(garbage = new Obstacle(nowScene->player->pos + D3DXVECTOR2(nowScene->GetRandNum(-500, 500), 1000), Obstacle::Type::GARABAGE));
+		garbages.push_back(garbage);
 		gDistance = 0.0f;
 	}
 

@@ -82,7 +82,7 @@ void CEnemy::Move(float deltaTime)
 	else
 		turnTime += deltaTime;
 
-	if (turnTime >= 0.03f)
+	if (turnTime >= 0.1f)
 	{
 		if (diff > D3DX_PI)
 			diff -= D3DX_PI * 2;

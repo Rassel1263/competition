@@ -11,6 +11,8 @@ public:
 
 	void Play(bool loop);
 	void Stop();
+	void Resume();
+	void OnOff(bool on);
 	void SetVolume(std::wstring dir, int volume);
 };
 
@@ -24,6 +26,7 @@ public:
 	void Play(std::string name, bool loop = false);
 	void Stop(std::string name);
 	void StopAll();
+	void ToggleVolume();
 	void SetVolume(std::string name, std::wstring dir, int volume);
 };
 

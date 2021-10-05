@@ -18,6 +18,10 @@ void MainScene::Init()
 
 void MainScene::Update(float deltaTime)
 {
+	if (Input::GetInstance().KeyDown(VK_F7))
+		SoundManager::GetInstance().ToggleVolume();
+
+
 	Scene::Update(deltaTime);
 }
 

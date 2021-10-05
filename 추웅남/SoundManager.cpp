@@ -30,7 +30,27 @@ void Sound::Stop()
 	for (int i = 0; i < szSound; ++i)
 	{
 		WCHAR temp[256];
-		wsprintf(temp, L"stop %d_%d", soundIDX, i);
+		wsprintf(temp, L"pause %d_%d", soundIDX, i);
+		mciSendString(temp, 0, 0, 0);
+	}
+}
+
+void Sound::Resume()
+{
+	for (int i = 0; i < szSound; ++i)
+	{
+		WCHAR temp[256];
+		wsprintf(temp, L"resume %d_%d", soundIDX, i);
+		mciSendString(temp, 0, 0, 0);
+	}
+}
+
+void Sound::OnOff(bool on)
+{
+	for (int i = 0; i < szSound; ++i)
+	{
+		WCHAR temp[256];
+		wsprintf(temp, L"setaudio %d_%d %s", soundIDX, i, on ? L"on" : L"off");
 		mciSendString(temp, 0, 0, 0);
 	}
 }
@@ -73,6 +93,15 @@ void SoundManager::StopAll()
 {
 	for (auto& sound : sounds)
 		sound.second->Stop();
+}
+
+void SoundManager::ToggleVolume()
+{
+	static bool toggle = true;
+	toggle = !toggle;
+
+	for (auto& sound : sounds)
+		sound.second->OnOff(toggle);
 }
 
 void SoundManager::SetVolume(std::string name, std::wstring dir, int volume)

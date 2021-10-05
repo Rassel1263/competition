@@ -45,6 +45,7 @@ public:
 	bool god = false;
 
 	Unit* prevTarget = NULL;
+
 public:
 	Player();
 

@@ -24,6 +24,10 @@ public:
 class ObstacleManager
 {
 public:
+	std::vector<Obstacle*> garbages;
+
+	void DeleteGarbage(Obstacle* garbage);
+
 	float gInterval = 0.0f;
 	float gDistance = 0.0f;
 	float rInterval = 0.0f;
