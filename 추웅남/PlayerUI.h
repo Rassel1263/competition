@@ -22,6 +22,9 @@ public:
 	Sprite weapons;
 	Sprite skill1;
 	Sprite skill2;
+
+	Sprite coinIcon;
+
 	std::vector<Sprite> coolTime;
 	std::vector<RenderInfo> coolRI;
 
@@ -36,7 +39,7 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void Render() override;
 	void FontUpdate(std::vector<Sprite>& font, float num, std::wstring name);
-	void FontRender(std::vector<Sprite>& font, RenderInfo ri, float kerning);
+	void FontRender(std::vector<Sprite>& font, RenderInfo ri, float kerning, int index = 1);
 
 	void SetSprite(std::wstring path, Sprite& spr);
 };

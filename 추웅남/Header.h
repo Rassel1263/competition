@@ -42,6 +42,7 @@
 #include "Player.h"
 
 #include "Bullet.h"
+#include "BossBullet.h"
 
 //System
 #include "Item.h"
@@ -57,11 +58,13 @@
 #include "FocusSKill.h"
 #include "Airsupport.h"
 
+
 //Effect
 #include "Effect.h"
 #include "DestEffect.h"
 #include "HitEffect.h"
 #include "BossIntro.h"
+#include "Coin.h"
 
 //UI
 #include "Font.h"

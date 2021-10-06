@@ -21,6 +21,18 @@ FlyingEnemy::FlyingEnemy(D3DXVECTOR2 pos) : CEnemy(pos)
 
 	layer = 6;
 
+	if (nowScene->curStage == 2)
+	{
+		D3DXVECTOR2 targetPos = target->pos;
+
+		auto lambda = [=]
+		{
+			nowScene->obm.AddObject(new Effect(L"onexplode", targetPos, D3DXVECTOR2(0.7, 0.7), D3DXVECTOR2(0.5, 0.5), 1, true, 0.05f));
+			nowScene->obm.AddObject(new HitBox(targetPos, D3DXVECTOR2(-100, -100), D3DXVECTOR2(100, 100), 10, 0.1f));
+		};
+
+		nowScene->obm.AddObject(new AttackGuide(targetPos, D3DXVECTOR2(1, 1), 1, 1.0f, lambda));
+	}
 
 	attackTime = 5.0f;
 

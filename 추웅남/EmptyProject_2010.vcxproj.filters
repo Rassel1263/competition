@@ -237,6 +237,10 @@
     <ClCompile Include="BigFly.cpp">
       <Filter>Object\Unit\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="BossBullet.cpp">
+      <Filter>Object\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -380,6 +384,10 @@
     <ClInclude Include="BigFly.h">
       <Filter>Object\Unit\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="BossBullet.h">
+      <Filter>Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">

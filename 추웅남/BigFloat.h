@@ -52,5 +52,6 @@ public:
 	bool Pattern1(float deltaTime);
 	bool Pattern2(float deltaTime);
 	bool Pattern3(float deltaTime);
+	bool Pattern4(float deltaTime);
 };
 

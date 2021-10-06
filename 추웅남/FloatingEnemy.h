@@ -2,6 +2,9 @@
 class FloatingEnemy : public CEnemy
 {
 public:
+	CWeapon* weapon = NULL;
+	float gunTimer = 0.0f;
+
 	FloatingEnemy(D3DXVECTOR2 pos);
 
 	virtual void Update(float deltaTime) override;

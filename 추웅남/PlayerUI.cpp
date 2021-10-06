@@ -22,6 +22,8 @@ PlayerUI::PlayerUI(Player* player)
 	SetSprite(L"skill1.png", skill1);
 	SetSprite(L"skill2.png", skill2);
 
+	SetSprite(L"coin.png", coinIcon);
+
 	coolTime.resize(6);
 	coolRI.resize(6);
 	for (int i = 0; i < 6; ++i)
@@ -39,8 +41,8 @@ PlayerUI::PlayerUI(Player* player)
 	coolRI[4].pos = { -735, -130 };
 	coolRI[5].pos = { -665, -130 };
 
-	fonts.resize(6);
-	fontRI.resize(6);
+	fonts.resize(7);
+	fontRI.resize(7);
 
 	fontRI[0].pos = D3DXVECTOR2(keyInfo.pos.x + 38, keyInfo.pos.y);
 	fontRI[0].scale = D3DXVECTOR2(0.4, 0.4);
@@ -49,6 +51,7 @@ PlayerUI::PlayerUI(Player* player)
 	fontRI[3].pos = D3DXVECTOR2(-695, -288);
 	fontRI[4].pos = D3DXVECTOR2(-875, -458);
 	fontRI[5].pos = D3DXVECTOR2(-695, -458);
+	fontRI[6].pos = D3DXVECTOR2(-480, -490);
 
 	for (int i = 2; i < 6; ++i)
 		fontRI[i].scale = { 0.5, 0.5 };
@@ -68,6 +71,7 @@ void PlayerUI::Update(float deltaTime)
 	speedUp.widthRatio = player->speedUpTime / 5.0f;
 	invincible.widthRatio = player->invincibleTime / 2.0f;
 
+
 	coolTime[0].heightRatio = 1 - static_cast<MachineGun*>(player->weapons[0])->reloadTimer / static_cast<MachineGun*>(player->weapons[0])->reloadTime;
 	coolTime[1].heightRatio = 1 - static_cast<NavanGun*>(player->weapons[1])->reloadTimer / static_cast<NavanGun*>(player->weapons[1])->reloadTime;
 	coolTime[2].heightRatio = player->weapons[2]->shootTimer / player->weapons[2]->shootInterval;
@@ -80,6 +84,8 @@ void PlayerUI::Update(float deltaTime)
 	FontUpdate(fonts[1], nowScene->finishPos, L"Score/");
 	for (int i = 2; i < 6; ++i)
 		FontUpdate(fonts[i], player->weapons[i - 2]->bulletAmount, L"Number/");
+
+	FontUpdate(fonts[6], player->coins, L"Score/");
 }
 
 void PlayerUI::Render()
@@ -94,6 +100,8 @@ void PlayerUI::Render()
 	speedUp.Render(hpRI);
 	invincible.Render(hpRI);
 
+	coinIcon.Render((RenderInfo{ D3DXVECTOR2(-550, -490), D3DXVECTOR2(2.5, 2.5) }));
+
 	skill1.Render(coolRI[4]);
 	skill2.Render(coolRI[5]);
 
@@ -102,6 +110,8 @@ void PlayerUI::Render()
 
 	for (int i = 2; i < 6; ++i)
 		FontRender(fonts[i], fontRI[i], 15);
+
+	FontRender(fonts[6], fontRI[6], 35, 2);
 
 	for (int i = 0; i < 6; ++i)
 		coolTime[i].Render(coolRI[i]);
@@ -121,16 +131,31 @@ void PlayerUI::FontUpdate(std::vector<Sprite>& font, float num, std::wstring nam
 	}
 }
 
-void PlayerUI::FontRender(std::vector<Sprite>& font, RenderInfo ri, float kerning)
+void PlayerUI::FontRender(std::vector<Sprite>& font, RenderInfo ri, float kerning, int index)
 {
-	int size = font.size();
-
-	for (int i = size - 1; i >= 0; --i)
+	if (index == 1)
 	{
-		RenderInfo temp;
-		temp.scale = ri.scale;
-		temp.pos = ri.pos + D3DXVECTOR2(-kerning * i, 0);
-		font[size - 1 - i].Render(temp);
+		int size = font.size();
+
+		for (int i = size - 1; i >= 0; --i)
+		{
+			RenderInfo temp;
+			temp.scale = ri.scale;
+			temp.pos = ri.pos + D3DXVECTOR2(-kerning * i, 0);
+			font[size - 1 - i].Render(temp);
+		}
+	}
+	else
+	{
+		int cnt = 0;
+		for (auto& spr : font)
+		{
+			RenderInfo temp;
+			temp.scale = ri.scale;
+			temp.pos = ri.pos + D3DXVECTOR2(kerning * cnt, 0);
+			spr.Render(temp);
+			cnt++;
+		}
 	}
 }
 

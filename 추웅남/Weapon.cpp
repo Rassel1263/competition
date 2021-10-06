@@ -25,6 +25,7 @@ MachineGun::MachineGun(Unit* owner) : CWeapon(owner)
 
 	speed = 2000;
 	damage = 5;
+
 }
 
 void MachineGun::Update(float deltaTime)
@@ -35,7 +36,9 @@ void MachineGun::Update(float deltaTime)
 
 		if (reloadTimer >= reloadTime)
 		{
-			SoundManager::GetInstance().Play("reload");
+			if(owner->team == L"player")
+				SoundManager::GetInstance().Play("reload");
+
 			reload = false;
 			bulletAmount = bulletMaxAmout;
 			reloadTimer = 0.0f;

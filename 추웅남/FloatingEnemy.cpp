@@ -20,6 +20,18 @@ FloatingEnemy::FloatingEnemy(D3DXVECTOR2 pos) : CEnemy(pos)
 
 	CreateCollider(D3DXVECTOR2(-100, -100), D3DXVECTOR2(100, 100), team);
 
+	if (nowScene->curStage == 2)
+	{
+		weapon = new MachineGun(this);
+
+		weapon->bulletAmount = 5;
+		weapon->bulletMaxAmout = 5;
+
+		weapon->damage = 3;
+		weapon->shootInterval = 0.5f;
+		weapon->speed = 600;
+	}
+
 	attackTime = 2.0f;
 }
 
@@ -32,7 +44,16 @@ void FloatingEnemy::Update(float deltaTime)
 		if (D3DXVec2Length(&(target->pos - pos)) < 400)
 			ability.speed = 150;
 		else
+		{
 			ability.speed = 250;
+
+
+			if (nowScene->curStage == 2)
+			{
+				weapon->Shoot(nowScene->GetAngleFromTarget(pos, target->pos));
+				weapon->Update(deltaTime);
+			}
+		}
 
 		Move(deltaTime);
 	}

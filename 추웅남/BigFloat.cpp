@@ -197,7 +197,7 @@ void BigFloat::ChoosePattern()
 {
 	prevPattern = pattern;
 	while (prevPattern == pattern)
-		pattern = nowScene->GetRandNum(1, 3);
+		pattern = 4;
 	attackTimer = 0.0f;
 
 	if (pattern == 1)
@@ -216,6 +216,11 @@ void BigFloat::ChoosePattern()
 		attackTime = 3.0f;
 		shootInterval = 0.3f;
 	}
+	else if (pattern == 4)
+	{
+		attackTime = 1.0f;
+		shootInterval = 0.5f;
+	}
 }
 
 void BigFloat::UpdatePattern(float deltaTime)
@@ -228,6 +233,8 @@ void BigFloat::UpdatePattern(float deltaTime)
 		bPattern = Pattern2(deltaTime);
 	else if (pattern == 3)
 		bPattern = Pattern3(deltaTime);
+	else if (pattern == 4)
+		bPattern = Pattern4(deltaTime);
 
 	if (!bPattern)
 	{
@@ -307,6 +314,25 @@ bool BigFloat::Pattern3(float deltaTime)
 	{
 		Camera::GetInstance().cameraQuaken = { 8, 8 };
 		nowScene->obm.AddObject(new Bullet(target, pos, 15, nowScene->GetRandNum(4, 7) * 100, nowScene->GetRandNum(0, 360), Bullet::Type::TORPEDO));
+
+		shootTimer = 0.0f;
+	}
+
+	return true;
+}
+
+bool BigFloat::Pattern4(float deltaTime)
+{
+	if (attackTimer >= attackTime)
+		return false;
+
+	shootTimer += deltaTime;
+
+	if (shootTimer >= shootInterval)
+	{
+		Camera::GetInstance().cameraQuaken = { 8, 8 };
+
+		nowScene->obm.AddObject(new BossBullet(0, pos, nowScene->GetAngleFromTarget(pos, target->pos), 10, 400, 2.0f));
 
 		shootTimer = 0.0f;
 	}

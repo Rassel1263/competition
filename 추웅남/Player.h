@@ -5,7 +5,11 @@ public:
 	bool intro = true;
 	bool stop = false;
 
+	float speedUpIndex = 0.0f;
+
 	int kill = 0;
+	int coins = 0;
+	int parts = 0;
 
 	int speedLevel = 1;
 	D3DXVECTOR2 prevPos = { 0, 0 };

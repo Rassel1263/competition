@@ -31,7 +31,7 @@ void Player::Update(float deltaTime)
 		Hit(20);
 
 	if (Input::GetInstance().KeyDown('Z'))
-		nowScene->enemyManager.SpawnEnemy(pos + D3DXVECTOR2(0, 400), CEnemy::Type::BigFly);
+		nowScene->obm.AddObject(new Coin(pos));
 
 	if (ability.hp <= 0)
 	{
@@ -167,7 +167,7 @@ void Player::Move(float deltaTime)
 
 	curRadian = D3DXToRadian(-curRotate + 90);
 
-	destSpeed = speedLevel * ((speedUp) ? 150 : 75);
+	destSpeed = speedLevel * ((speedUp) ? 150 : 75 + speedUpIndex);
 	if (speedDown) destSpeed /= 2;
 	ability.speed += std::ceil(destSpeed - ability.speed) * 0.1f;
 
