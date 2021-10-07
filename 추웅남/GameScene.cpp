@@ -26,6 +26,7 @@ void GameScene::Init()
 	nowScene->obm.AddObject(new Font<float>(L"Score/", score, D3DXVECTOR2(850, 465), D3DXVECTOR2(1, 1), 35, 2, 2));
 
 	nowScene->obm.AddObject(new StageFont(StageFont::Type::START));
+	obm.AddObject(new Mission());
 
 	enemyManager.Init(4.0f, 7.0f);
 	obstacleManager.Init(700, 1200);

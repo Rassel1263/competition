@@ -38,6 +38,7 @@
 #include "BigFloat.h"
 #include "BigFly.h"
 #include "EnemyManager.h"
+#include "Mission.h"
 
 #include "Player.h"
 

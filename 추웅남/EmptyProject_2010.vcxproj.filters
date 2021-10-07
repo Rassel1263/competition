@@ -241,6 +241,7 @@
       <Filter>Object\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="Mission.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -388,6 +389,7 @@
       <Filter>Object\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Coin.h" />
+    <ClInclude Include="Mission.h" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">

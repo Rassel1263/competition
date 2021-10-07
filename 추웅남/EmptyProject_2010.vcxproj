@@ -424,6 +424,7 @@
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MiniMap.cpp" />
+    <ClCompile Include="Mission.cpp" />
     <ClCompile Include="MsgBox.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Obstacle.cpp" />
@@ -476,6 +477,7 @@
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MiniMap.h" />
+    <ClInclude Include="Mission.h" />
     <ClInclude Include="MsgBox.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Obstacle.h" />

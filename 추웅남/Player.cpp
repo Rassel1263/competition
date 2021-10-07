@@ -70,6 +70,10 @@ void Player::Render()
 {
 	ri.pos = pos;
 
+	D3DXMATRIX matrix;
+	D3DXMatrixIdentity(&matrix);
+	Game::GetInstance().DrawLine(pos, D3DXVECTOR2(0, 23000), matrix, D3DCOLOR_ARGB(255, 255, 255, 255));
+
 	if (god)
 		colorShader->Render(colorShader, GetNowSprite(), ri, D3DXVECTOR4(1, 1, 0, 0.5), true);
 	else if (speedDown)

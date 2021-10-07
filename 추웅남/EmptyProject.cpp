@@ -44,9 +44,11 @@ HRESULT InitD3D(HWND hWnd)
 	// using more complex geometry, we will create a device with a zbuffer.
 	D3DPRESENT_PARAMETERS d3dpp;
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
-	d3dpp.Windowed = TRUE;
+	d3dpp.Windowed = false;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
+	d3dpp.BackBufferWidth = 1920;
+	d3dpp.BackBufferHeight = 1080;
 	d3dpp.EnableAutoDepthStencil = TRUE;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
 
@@ -97,6 +99,9 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
+	case WM_SETCURSOR:
+		SetCursor(NULL);
+		break;
 	case WM_HOTKEY:
 		switch (wParam)
 		{
